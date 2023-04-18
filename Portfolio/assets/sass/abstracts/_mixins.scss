@@ -1,0 +1,160 @@
+@mixin d_flex($dis: flex, $align: center, $justify: center) {
+    display: $dis;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin font($f_size, $f_line, $f_weight: normal, $f_family: $primary_font, $f_color: $dark_green) {
+    font-size: $f_size;
+    line-height: $f_line;
+    font-weight: $f_weight;
+    font-family: $f_family;
+    color: $f_color;
+}
+
+@mixin before_after($content: "", $position: absolute, $top_bottom: top, $left_right: left, $top_bottom_val: 0, $left_right_val: 0, $width: 100%, $height: 100%) {
+    content: $content;
+    position: $position;
+    #{$top_bottom}: $top_bottom_val;
+    #{$left_right}: $left_right_val;
+    width: $width;
+    height: $height;
+}
+
+@mixin position_center($position: absolute, $top: 50%, $left: 50%, $translate_x: -50%, $translate_y: -50%) {
+    position: $position;
+    top: $top;
+    left: $left;
+    transform: translate($translate_x, $translate_y);
+}
+
+@mixin reset_list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+@mixin nav_common {
+    li {
+        display: inline-block;
+        @content;
+
+        &.active a {
+            color: $green;
+            -webkit-text-stroke: 0.5px currentColor;
+        }
+
+        &.active a:before,
+        &.active a:after {
+            opacity: 1;
+        }
+
+        a {
+            display: inline-block;
+            padding: {
+                inline: 25px;
+                block: 5px;
+            }
+            position: relative;
+            text-transform: uppercase;
+            @include font(18px, 1.5, 500, $primary_font, $dark_green);
+            transition: $transition;
+
+            &:before {
+                @include before_after($top_bottom_val: 50%, $left_right: left, $width: 38px);
+                border: {
+                    left: 1px solid $green;
+                }
+                box-shadow: inset 2px 0px 0 0 $green;
+                border-radius: 30px;
+                transform: translate(0, -50%);
+                transition: $transition;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            &:after {
+                @include before_after($top_bottom_val: 50%, $left_right: right, $width: 38px);
+                border: {
+                    right: 1px solid $green;
+                }
+                box-shadow: inset -2px 0px 0 0 $green;
+                border-radius: 30px;
+                transform: translate(0, -50%);
+                transition: $transition;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            &:hover {
+                color: $green;
+                -webkit-text-stroke: 0.5px currentColor;
+            }
+
+            &:hover:before,
+            &:hover:after {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@mixin horizontal_list {
+    @include d_flex();
+    @include nav_common {
+        margin-inline: 25px;
+    }
+}
+
+@mixin vertical_list {
+    @include d_flex($align: flex-start);
+    @include nav_common {
+        margin-block: 28px;
+        margin-inline: -25px;
+    }
+    flex-direction: column;
+}
+
+@mixin back_img($back_repeat: no-repeat, $back_size: cover, $back_position_x: 50%, $back_position_y: 50%, $back_image: initial) {
+    background: {
+        repeat: $back_repeat;
+        size: $back_size;
+        position: $back_position_x $back_position_y;
+        image: $back_image;
+    }
+}
+
+@mixin media_screen($media_min_max, $media_size) {
+    @media screen and (#{$media_min_max}-width: $media_size) {
+        @content;
+    }
+}
+
+// @mixin e($name) {
+//     @at-root #{&}__#{$name} {
+//         @content;
+//     }
+// }
+
+// @mixin m($name) {
+//     @at-root #{&}--#{$name} {
+//         @content;
+//     }
+// }
+
+// .block {
+//     color: red;
+
+//     @include e(element) {
+//         color: green;
+
+//         @include m(modifier) {
+//             color: blue;
+
+//             @include e(element) {
+//                 color: pink;
+//             }
+//         }
+//     }
+// }
+

@@ -1,0 +1,48 @@
+@mixin btn_common($btn_bg_color: #eee) {
+    cursor: pointer;
+    @include d_flex(inline-flex);
+    width: auto;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: $btn_bg_color;
+    transition: 0.5s;
+}
+
+@function light_comp($color) {
+    $complement: complement($color);
+    $light_complement: lighten($complement, 20%);
+    @return $light_complement;
+}
+
+.btn-simple {
+    @include btn_common();
+}
+
+@each $color_key, $color_val in $colors {
+    .btn_#{$color_key} {
+        @include btn_common($color_val);
+        color: #fff;
+        &:hover {
+            background-color: lighten($color: $color_val, $amount: 15);
+        }
+    }
+    .btn_outlined_#{$color_key} {
+        @include btn_common(transparent);
+        border: 2px solid $color_val;
+        color: $color_val;
+        &:hover {
+            background-color: $color_val;
+            color: #fff;
+        }
+    }
+    .btn_complement_#{$color_key} {
+        @include btn_common($color_val);
+        color: light_comp($color_val);
+
+        &:hover {
+            background-color: light_comp($color_val);
+            color: $color_val;
+        }
+    }
+}

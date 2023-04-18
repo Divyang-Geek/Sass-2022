@@ -1,0 +1,82 @@
+/* === Header Start === */
+
+.main_header {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    top: 0;
+    left: 0;
+    transition: $transition;
+    z-index: 100;
+
+    .container {
+        height: 100%;
+
+        .row {
+            height: 100%;
+        }
+    }    
+    
+    .site_branding {
+        @include d_flex($justify: flex-start);
+        height: 100%;
+
+
+        a {
+            @include d_flex;
+            width: 100px;
+        }
+    }
+
+    .menu_toggle {
+        @include media_screen(min, $lg_min) {
+            display: none;
+        }
+    }
+
+    .header_menu {
+        height: 100%;
+
+        .main_navigation {
+            height: 100%;
+
+            .header_menu_box {
+                height: 100%;
+
+                ul {
+                    height: 100%;
+                    @include horizontal_list;
+                }
+            }
+        }
+    }
+    .header_contact {
+        @include d_flex($justify:flex-end);
+        height: 100%;
+    }
+    .contact_blurb {
+        @include d_flex();
+        @include font(18px, 1.5, 600, $primary_font, $dark_green);
+        gap: 30px;
+        letter-spacing: 1px;
+
+        &_icon {
+            @include d_flex();
+            width: 40px;
+            height: 40px;
+            background: $white;
+            border-radius: 50%;
+
+            img {
+                width: 30px;
+                filter: brightness(0) saturate(100%) invert(38%) sepia(8%) saturate(2676%) hue-rotate(128deg) brightness(94%) contrast(89%);
+            }
+        }
+
+        &:hover {
+            color: $green;
+        }
+    }
+}
+
+/* === Header End === */

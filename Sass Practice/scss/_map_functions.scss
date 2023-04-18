@@ -1,0 +1,52 @@
+$font_weights: (
+    "regular": 400,
+    "medium": 500,
+    "semi-bold": 600,
+    "bold": 700,
+    "extra-bold": 900,
+);
+
+$light_weights: (
+    "lightest": 100,
+    "light": 300,
+);
+
+$merge_weights: map-merge(
+    $map1: $font_weights,
+    $map2: $light_weights,
+);
+
+// $remove_weights : map-remove($map: $font_weights, $keys: "medium", "semi-bold");
+$remove_weights: map-remove($font_weights, "medium", "semi-bold");
+
+.map1 {
+    font-weight: map-get($map: $font_weights, $key: "semi-bold");
+}
+
+.map2 {
+    font-weight: map-keys($map: $font_weights);
+}
+
+.map3 {
+    font-weight: map-values($map: $font_weights);
+}
+
+.map4 {
+    font-weight: map-keys($map: $merge_weights);
+}
+
+.map5 {
+    font-weight: map-values($map: $remove_weights);
+}
+
+.map6 {
+    font-weight: map-has-key($map: $font_weights, $key: "semi-bold");
+}
+
+.map7 {
+    font-weight: map-has-key($map: $font_weights, $key: "light");
+}
+
+.map8 {
+    font-weight: nth($list: $font_weights, $n: 2);
+}

@@ -1,0 +1,87 @@
+@use "sass:math";
+
+/* === Container Start === */
+
+@mixin make_container($gutter: $container_padding_x) {
+    --#{$prefix}gutter_x: #{$gutter};
+    --#{$prefix}gutter_y: 0;
+    width: 100%;
+    padding-right: calc(var(--#{$prefix}gutter_x) * 0.5);
+    padding-left: calc(var(--#{$prefix}gutter_x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container {
+    @include make_container();
+}
+
+@each $container_breakpoint, $container_width in $make_container {
+    @include media_screen(min, $container_breakpoint) {
+        .container {
+            width: $container_width;
+        }
+    }
+}
+
+/* === Container End === */
+
+/* === Grid System Start === */
+
+@mixin make_row($gutter: $grid-gutter_width) {
+    --#{$prefix}gutter_x: #{$gutter};
+    --#{$prefix}gutter_y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--#{$prefix}gutter_y) * -1);
+    margin-right: calc(var(--#{$prefix}gutter_x) * -0.5);
+    margin-left: calc(var(--#{$prefix}gutter_x) * -0.5);
+}
+
+@mixin make_col() {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--#{$prefix}gutter_x) * 0.5);
+    padding-left: calc(var(--#{$prefix}gutter_x) * 0.5);
+    margin-top: var(--#{$prefix}gutter_y);
+}
+
+.row {
+    @include make_row();
+
+    > * {
+        @include make_col();
+    }
+}
+
+@each $col_name, $col_size in $grid_breakpoints {
+    @include media_screen(min, $col_size) {
+        @for $col_var from $grid_columns_start through $grid_columns {
+            .col_#{$col_name}_#{$col_var} {
+                width: math.div($col_var * 100%, $grid_columns);
+                flex: 0 0 auto;
+            }
+        }
+    }
+}
+
+// Gutters
+@each $col_name, $col_size in $grid_breakpoints {
+    @include media_screen(min, $col_size) {
+        @each $gkey, $gvalue in $gutters {
+            .g_#{$col_name}_#{$gkey},
+            .gx_#{$col_name}_#{$gkey} {
+                --#{$prefix}gutter_x: #{$gvalue};
+            }
+
+            .g_#{$col_name}_#{$gkey},
+            .gy_#{$col_name}_#{$gkey} {
+                --#{$prefix}gutter_y: #{$gvalue};
+            }
+        }
+    }
+}
+
+/* === Grid System End === */

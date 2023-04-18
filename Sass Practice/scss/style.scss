@@ -1,0 +1,329 @@
+@import "variables";
+@import "colors";
+@import "fonts";
+@import "mixins";
+@import "operators";
+@import "interpolation";
+@import "functions";
+@import "map_functions";
+@import "if_else";
+@import "for_loop";
+@import "each_loop";
+@import "utilities";
+
+// components
+@import "components/buttons";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+html,
+body {
+    overflow-x: hidden !important;
+}
+
+body {
+    font: 100% $body_font;
+    color: $primary_color;
+    font-size: 16px;
+    min-height: 100vh;
+    padding : {
+        top: 10px;
+        bottom: 10px;
+        left: 50px;
+        right: 50px;
+    }
+}
+
+.site-header {
+    nav {
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            @include list_item {
+                color: black;
+            }
+        }
+    }
+}
+
+.boxes-sec {
+    @include d_flex();
+    gap: 50px;
+    margin-bottom: 100px;
+
+    .box {
+        width: 200px;
+        height: 200px;
+        padding: 20px;
+        @include d_flex();
+    }
+
+    .box-1 {
+        @include box_shadow(3px, 6px, 6px, 0, $primary_color);
+        @include b_radius(20px);
+    }
+
+    .box-2 {
+        @include box_shadow(-3px, -6px, 6px, 0, $secondary_color);
+        @include b_radius(40px);
+    }
+
+    .box-3 {
+        @include box_shadow(3px, -6px, 6px, 10px, $primary_color);
+        @include b_radius(60px);
+    }
+}
+
+.extend-sec {
+    @extend .boxes-sec;
+    margin-bottom: 0;
+
+    .extend-box {
+        @extend .box;
+        width: auto;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .extend-box-1 {
+        @extend .box-1;
+    }
+
+    .extend-box-2 {
+        @extend .box-2;
+    }
+
+    .extend-box-3 {
+        @extend .box-3;
+    }
+}
+
+%extend_placeholder {
+    color: $secondary_color;
+}
+
+.extend-with-place-sec {
+    @include box_shadow(0, 10px, 10px, 0px, $black_color);
+    padding: 30px;
+
+    .extend-with-place-box {
+        h3 {
+            @extend %extend_placeholder;
+        }
+    }
+}
+
+.custom_code {
+    @import "foundation/code", "foundation/lists";
+}
+
+.permalinkNesting {
+    @import "themes";
+}
+
+.DK-theme {
+    @import "themes";
+}
+
+.pulse1 {
+    @include inline_animation($duration: 5s, $delay: 100ms) {
+        from {
+            background-color: yellow;
+        }
+        to {
+            background-color: red;
+        }
+    }
+}
+
+.pulse2 {
+    @include inline_animation($duration: 7s, $delay: 200ms) {
+        from {
+            background-color: green;
+        }
+        to {
+            background-color: gold;
+        }
+    }
+}
+
+.pulse3 {
+    @include inline_animation2($name: p1-anim, $duration: 2s, $delay: 300ms) {
+        from {
+            background-color: green;
+        }
+        to {
+            background-color: gold;
+        }
+    }
+}
+
+.main-list {
+    nav {
+        ul {
+            @include horizontal_list();
+            background-color: $primary_color;
+            padding: 15px;
+
+            li {
+                padding: 15px;
+                color: $white_color;
+            }
+        }
+    }
+}
+
+.main-replace-text {
+    h2 {
+        @include back_image(url("assets/images/icon-mail.svg"), no-repeat, 100%, 50%, 10%);
+    }
+    h3 {
+        @include back_image(url("assets/images/icon-mail.svg"), no-repeat, 100%, 50%, 10%);
+    }
+}
+
+.avatar {
+    @include square(100px, 20px);
+}
+
+.order-sec {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    @include order(33.3333%, 150px, ".box1", ".box2", ".box3", ".box4", ".box5", ".box6");
+}
+
+.row {
+    @include row();
+}
+
+.col-lg-6 {
+    width: col-half($container_width);
+}
+
+.col-lg-4 {
+    width: col-third($container_width);
+}
+
+.col-lg-3 {
+    width: col-fourth($container_width);
+}
+
+.col-lg-2_5 {
+    width: col-five($container_width);
+}
+
+.col-lg-2 {
+    width: col-six($container_width);
+}
+
+.col-lg-1 {
+    width: col-twelve($container_width);
+}
+
+[class*="col-"] {
+    background: mix($primary_color, $secondary_color, 80%);
+    height: 100px;
+    margin-top: 10px;
+}
+
+.common_img {
+    background-image: common_img("header.jpg");
+}
+
+.common_img2 {
+    background-image: common_img2("header2.jpg");
+}
+
+.demo-container {
+    width: min(100% - 2rem, 60rem);
+    margin-inline: auto;
+    height: 100px;
+    background-color: #fff200;
+}
+
+.sidebar {
+    float: left;
+    margin-left: pow(10, 3) * 1px;
+}
+
+.invert-sec {
+    background-color: invert($primary-color, 30%);
+}
+
+/* Introspection Start */
+
+$Introspection_map: (
+    "lightest": 100,
+    "light": 300,
+);
+
+.Introspection {
+    $Introspection_Num: 10px;
+    width: variable-exists($name: primary-color);
+    width: variable-exists($name: Introspection_Num);
+    height: global-variable-exists($name: primary-color);
+    height: global-variable-exists($name: Introspection_Num);
+    font-size: mixin-exists($name: d-flex);
+    font-weight: function-exists($name: common_img);
+    line-height: type-of($value: $Introspection_Num);
+    transform: type-of($value: $Introspection_map);
+    letter-spacing: inspect($value: $Introspection_Num);
+}
+
+/* Introspection End */
+
+/* @content Start */
+
+.button {
+    border: 2px solid $primary_color;
+    padding: 15px 20px;
+    outline: none;
+    appearance: none;
+    transition: 0.3s;
+    font: 20px $body_font;
+    background: transparent;
+    @include hover {
+        border-style: dashed;
+        cursor: pointer;
+    }
+    @include media-screen(max, 991px) {
+        padding: 8px;
+    }
+}
+
+.content-sec {
+    font-size: 50px;
+}
+
+@include media-screen(min, 767px) {
+    .content-sec {
+        font-size: 25px;
+    }
+}
+/* @content End */
+
+@media print {
+    .page {
+        width: 8in;
+
+        @at-root (without: media) {
+            color: #111;
+        }
+
+        @at-root (with: rule) {
+            font-size: 1.2em;
+        }
+    }
+}

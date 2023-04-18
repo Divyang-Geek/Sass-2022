@@ -1,0 +1,156 @@
+@for $i from 1 through 3 {
+    .list-#{$i} {
+        width: 100% * $i;
+        background: darken($color: red, $amount: $i * 10%);
+    }
+}
+
+
+@mixin cols_mix($col_size, $col_start, $col_end) {
+    @for $col_var from $col_start through $col_end {
+        .col_#{$col_size}_#{$col_var} {
+            width: (100% / $col_end) * $col_var;
+            position: relative;
+            padding: 0 15px;
+            flex: 0 0 auto;
+        }
+    }
+}
+
+@mixin respo_media($media_size) {
+    $xs_width: "(min-width:0)";
+    $sm_width: "(min-width:576px)";
+    $md_width: "(min-width:768px)";
+    $lg_width: "(min-width:992px)";
+    $xl_width: "(min-width:1200px)";
+    $xxl_width: "(min-width:1440px)";
+    // $xs_width: "0px";
+    // $sm_width: "576px";
+    // $md_width: "768px";
+    // $lg_width: "992px";
+    // $xl_width: "1200px";
+    // $xxl_width: "1440px";
+
+    @if $media_size == xs_width {
+        // @include media-screen(min, $xs_width) {
+        //     @content;
+        // }
+        @media screen and #{$xs_width} {
+            @content;
+        }
+    } @else if $media_size == sm_width {
+        @media screen and #{$sm_width} {
+            @content;
+        }
+    } @else if $media_size == md_width {
+        @media screen and #{$md_width} {
+            @content;
+        }
+    } @else if $media_size == lg_width {
+        @media screen and #{$lg_width} {
+            @content;
+        }
+    } @else if $media_size == xl_width {
+        @media screen and #{$xl_width} {
+            @content;
+        }
+    } @else if $media_size == xxl_width {
+        @media screen and #{$xxl_width} {
+            @content;
+        }
+    }
+}
+
+@include respo_media(xs_width) {
+    @include cols_mix(xs, $col_start, $col_end);
+}
+
+@include respo_media(sm_width) {
+    @include cols_mix(sm, $col_start, $col_end);
+}
+
+@include respo_media(md_width) {
+    @include cols_mix(md, $col_start, $col_end);
+}
+
+@include respo_media(lg_width) {
+    @include cols_mix(lg, $col_start, $col_end);
+}
+
+@include respo_media(xl_width) {
+    @include cols_mix(xl, $col_start, $col_end);
+}
+
+@include respo_media(xxl_width) {
+    @include cols_mix(xxl, $col_start, $col_end);
+}
+
+// @mixin col_lg($size, $from, $to) {
+//     @for $col_lg from $from through $to {
+//         .col_#{$size}_#{$col_lg} {
+//             width: (100%/$to) * $col_lg;
+//             position: relative;
+//             padding: 0 15px;
+//         }
+//     }
+// }
+
+// @mixin res_media($media) {
+//     $xs_width: "(min-width: 0)";
+//     $sm_width: "(min-width: 576px)";
+//     $md_width: "(min-width: 768px)";
+//     $lg_width: "(min-width: 992px)";
+//     $xl_width: "(min-width: 1200px)";
+
+//     @if $media == xs_width {
+//         @media screen and #{$xs_width} {
+//             @content;
+//         }
+//     }
+//     @else if $media == sm_width {
+//         @media screen and #{$sm_width} {
+//             @content;
+//         }
+//     }
+//     @else if $media == md_width {
+//         @media screen and #{$md_width} {
+//             @content;
+//         }
+//     }
+//     @else if $media == lg_width {
+//         @media screen and #{$lg_width} {
+//             @content;
+//         }
+//     }
+//     @else if $media == xl_width {
+//         @media screen and #{$xl_width} {
+//             @content;
+//         }
+//     }
+// }
+
+// @include res_media(xl_width) {
+//     @include col_lg(xl,1,12);
+// }
+
+// @include res_media(lg_width) {
+//     @include col_lg(lg,1,12);
+// }
+
+// @include res_media(md_width) {
+//     @include col_lg(md,1,12);
+// }
+
+// @include res_media(sm_width) {
+//     @include col_lg(sm,1,12);
+// }
+
+// @include res_media(xs_width) {
+//     @include col_lg(xs,1,12);
+// }
+
+@for $i from 1 through 5 {
+    ul li:nth-child(3n + #{$i}) {
+        background-color: lighten($color: $primary_color, $amount: $i * 10%);
+    }
+}

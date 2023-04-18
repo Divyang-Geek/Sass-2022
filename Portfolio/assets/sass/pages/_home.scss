@@ -1,0 +1,196 @@
+.main_banner {
+    .banner_content {
+        @include d_flex($align: flex-start);
+        flex-flow: column;
+        height: 100%;
+        padding: 100px 0 100px;
+
+        p {
+            font-size: 25px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        .border_link {
+            margin-bottom: 40px;
+        }
+    }
+
+    .banner_img {
+        @include d_flex($justify: flex-end);
+        flex-flow: column;
+        height: 100%;
+        padding: 100px 0 0;
+
+        img {
+            width: 80vh;
+            max-width: unset;
+        }
+    }
+}
+
+.blurb_box {
+    @include d_flex($justify: flex-start);
+    gap: 20px;
+
+    &_num {
+        @include font(80px, 1.1, 700);
+    }
+
+    &_text {
+        @include font(20px, 1.5, 500);
+        text-transform: uppercase;
+    }
+
+    &.blurb_box_vertical {
+        flex-flow: column;
+        align-items: flex-start;
+    }
+}
+
+.main_what_do_help {
+    padding: 200px 0 270px 0;
+}
+
+.what_do_help_boxes {
+    padding-right: 60px;
+
+    .what_do_help_box {
+        @include d_flex($align: flex-start, $justify: flex-start);
+        gap: 40px;
+        background: $white;
+        padding: 45px 50px;
+        position: relative;
+        border: 1px solid rgb($green, 0.1);
+        border-radius: 40px;
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+            box-shadow: $box-shadow;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        &_icon {
+            $icon_size: 120px;
+            flex: 0 0 auto;
+            @include d_flex;
+            width: $icon_size;
+            height: $icon_size;
+            border-radius: 50%;
+
+            img {
+                width: 40px;
+            }
+        }
+
+        &_content {
+            align-self: center;
+
+            p {
+                margin: 0;
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.what_do_help_content_text {
+    margin-bottom: 66px;
+
+    p {
+        font-size: 21px;
+        line-height: 2.5;
+        margin-bottom: 30px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.what_do_help_content_blurbs {
+    @include d_flex($justify: flex-start);
+    gap: 120px;
+}
+
+.main_work_experience {
+    padding: {
+        top: 130px;
+        bottom: 130px;
+    }
+}
+
+.work_experience_box {
+    @include d_flex($align: unset, $justify: space-between);
+    $icon_size: 75px;
+    $box_bottom_space: 100px;
+
+    .h4_title {
+        margin-bottom: 35px;
+    }
+
+    p {
+        margin-bottom: 0;
+        font-size: 20px;
+    }
+
+    &:not(:last-child) &_left,
+    &:not(:last-child) &_right {
+        padding-bottom: $box_bottom_space;
+    }
+
+    &_left {
+        width: 43%;
+        flex: 0 0 auto;
+        padding: {
+            right: calc($icon_size / 1.5);
+        }
+
+        p {
+            line-height: 1.2;
+        }
+    }
+
+    &_right {
+        flex: 1;
+        position: relative;
+        padding: {
+            left: $icon_size;
+        }
+
+        &:before {
+            @include before_after($width: 1px);
+            border: {
+                left: 1px dashed $green;
+            }
+        }
+
+        p {
+            line-height: 2.5;
+        }
+
+        .circle_box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: $icon_size;
+            height: $icon_size;
+            border: 1px dashed $green;
+            background: $light_yellow;
+            border-radius: 50%;
+            transform: translate(-50%, -10px);
+
+            span {
+                @include position_center();
+                width: calc($icon_size / 2);
+                height: calc($icon_size / 2);
+                display: block;
+                border-radius: 50%;
+            }
+        }
+    }
+}

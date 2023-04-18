@@ -1,0 +1,31 @@
+.operators-title {
+    padding: 10px == 10px;
+    padding: 10px == 20px;
+    padding: 10px == 10em;
+    padding: 10px != 20px;
+    padding: poppins == poppins;
+    padding: poppins == "poppins";
+    padding: (5px 10px 15px) == (5px 10px 15px);
+    padding: (5px 10px 15px) == (20px 25px 30px);
+    padding: 1000 > 100;
+    padding: 10 > 100;
+    padding: 1000ms >= 1s;
+    padding: 1000ms >= 2s;
+    padding: 10px == 10px and 10px == 20;
+    padding: poppins == "poppins" and 10px == 20;
+    padding: 10px == 10px or 10px == 20;
+    padding: not 10 == 10px;
+    padding: not 10 != 10px;
+}
+
+.string-and-numeric-title {
+    $var1: 10;
+    $var2: 2;
+    padding: $var1 + px; // we can add more Operators + - * / %
+    margin: $var1 + $var2 + px; // we can add more Operators + - * / %
+    font-size: $var1 + px;
+
+    span {
+        font-size: $var1 * $var2 + px;
+    }
+}

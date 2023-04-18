@@ -1,0 +1,55 @@
+// column grid
+
+$container_width: 100%;
+
+// @function col-half($width) {  //not working with % sign
+//     @return $width/2 + %;
+// }
+
+@function col-half($width) {
+    @return $width/2;
+}
+
+@function col-third($width) {
+    @return $width/3;
+}
+
+@function col-fourth($width) {
+    @return $width/4;
+}
+
+@function col-five($width) {
+    @return $width/5;
+}
+
+@function col-six($width) {
+    @return $width/6;
+}
+
+@function col-twelve($width) {
+    @return $width/12;
+}
+
+// common image
+$baseurl: "../images/";
+
+@function common_img($img_url) {
+    @return url($baseurl + $img_url);
+}
+
+@function common_img2($img_url) {
+    @return url($baseurl + "mobile/" + $img_url);
+}
+
+@function pow($base, $exponent) {
+    $result: 1;
+    @for $_ from 1 through $exponent {
+        $result: $result * $base;
+    }
+    @return $result;
+}
+
+@function invert($color, $amount: 100%) {
+    $inverse: change-color($color, $hue: hue($color) + 180);
+    @return mix($inverse, $color, $amount);
+}

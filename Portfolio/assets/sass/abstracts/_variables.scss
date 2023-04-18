@@ -1,0 +1,112 @@
+// Color variables
+$green: #286f6b;
+$yellow: #efc04a;
+$orange: #e96a45;
+$white: #ffffff;
+$dark_green: #27383f;
+$light_green: #336e6c;
+$light_yellow: #f8f7f2;
+
+// Colors map
+$colors: (
+    "green": $green,
+    "yellow": $yellow,
+    "orange": $orange,
+    "white": $white,
+    "dark_green": $dark_green,
+    "light_green": $light_green,
+    "light_yellow": $light_yellow,
+);
+
+// Font variables
+$primary_font: "Exo 2";
+
+// Transition variables
+$transition: all 0.5s;
+
+// Shadow variables
+$box-shadow: 0 10px 10px 0 rgb($green, 5%);
+
+// Prefix for :root CSS variables
+$variable_prefix: geek_ !default;
+$prefix: $variable_prefix !default;
+
+// Spacers variables
+$spacer: 1rem !default;
+$spacers: (
+    0: 0,
+    1: $spacer * 0.25,
+    2: $spacer * 0.5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+) !default;
+
+// Container variables
+$make_container: (
+    // "0": 100%,
+    "576px": 540px,
+    "768px": 720px,
+    "992px": 960px,
+    "1200px": 1140px,
+    "1400px": 1320px,
+    "1600px": 1540px,
+);
+
+// Grid variables
+$grid_columns_start: 1 !default;
+$grid_columns: 12 !default;
+$grid_gutter_width: 1.5rem !default;
+$grid_breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+    xxxl: 1600px,
+) !default;
+
+// Gutters variables
+$gutters: $spacers;
+
+// Container variables
+$container_padding_x: $grid_gutter_width !default;
+
+// Responsive variables
+// min
+$sm_min: map-get(
+    $map: $grid_breakpoints,
+    $key: "sm",
+);
+$md_min: map-get(
+    $map: $grid_breakpoints,
+    $key: "md",
+);
+$lg_min: map-get(
+    $map: $grid_breakpoints,
+    $key: "lg",
+);
+$xl_min: map-get(
+    $map: $grid_breakpoints,
+    $key: "xl",
+);
+$xxl_min: map-get(
+    $map: $grid_breakpoints,
+    $key: "xxl",
+);
+$xxxl_min: map-get(
+    $map: $grid_breakpoints,
+    $key: "xxxl",
+);
+
+// max
+$pixel_less: 1px;
+$sm_max: $sm_min - $pixel_less;
+$md_max: $md_min - $pixel_less;
+$lg_max: $lg_min - $pixel_less;
+$xl_max: $xl_min - $pixel_less;
+$xxl_max: $xxl_min - $pixel_less;
+$xxxl_max: $xxxl_min - $pixel_less;
+
+

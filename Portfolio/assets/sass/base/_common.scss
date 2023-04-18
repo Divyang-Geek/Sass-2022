@@ -1,0 +1,41 @@
+/* === Common Start === */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul {
+    @include reset_list;
+}
+
+.back-img {
+    @include back_img();
+}
+
+a {
+    color: $dark_green;
+    text-decoration: none;
+    transition: $transition;
+}
+
+.border_link {
+    @include font(20px, 1.2, 700, $f_color: $orange);
+    @include d_flex(inline-flex);
+    border-bottom: 1px solid currentColor;
+
+    &:hover {
+        color: $dark_green;
+    }
+}
+
+.sec_title {
+    margin-bottom: 85px;
+}
+
+/* === Common End === */

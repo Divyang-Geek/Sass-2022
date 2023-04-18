@@ -1,0 +1,18 @@
+@mixin margin($position, $unit) {
+    margin-#{$position}: $unit + px;
+}
+
+@mixin set-icon($name) {
+    .icon-#{$name} {
+        background-image: url("assets/images/icon-#{$name}.svg");
+    }
+}
+
+.interpolation-sec {
+    @include set-icon(mail);
+    @include set-icon(call);
+
+    .interpolation-title {
+        @include margin("left", 50);
+    }
+}

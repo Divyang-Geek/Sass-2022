@@ -1,0 +1,28 @@
+@each $color_key, $color_val in $colors {
+    .text_#{$color_key} {
+        color: $color_val;
+    }
+    .bg_#{$color_key} {
+        background-color: $color_val;
+    }
+
+    // // light variations
+    // @for $color_light from 1 through 8 {
+    //     .text_#{$color_key}_light_#{$color_light} {
+    //         color: mix(white, $color_val, $color_light * 10);
+    //     }
+    //     .bg_#{$color_key}_light_#{$color_light} {
+    //         background-color: mix(white, $color_val, $color_light * 10);
+    //     }
+    // }
+
+    // // dark variations
+    // @for $color_dark from 1 through 8 {
+    //     .text_#{$color_key}_dark_#{$color_dark} {
+    //         color: mix(black, $color_val, $color_dark * 10);
+    //     }
+    //     .bg_#{$color_key}_dark_#{$color_dark} {
+    //         background-color: mix(black, $color_val, $color_dark * 10);
+    //     }
+    // }
+}

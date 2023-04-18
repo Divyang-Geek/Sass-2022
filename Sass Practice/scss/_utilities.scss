@@ -1,0 +1,189 @@
+@use 'sass:math';
+
+// utilities map
+$utilities: (
+    "padding": (
+        "prefix": "p",
+        "values": (
+            "0": 0,
+            "1": $base_padding,
+            "2": $base_padding * 2,
+            "3": $base_padding * 3,
+            "4": $base_padding * 4,
+            "5": $base_padding * 5,
+        )
+    ),
+    "padding-left": (
+        "prefix": "pl",
+        "values": (
+            "0": 0,
+            "1": $base_padding,
+            "2": $base_padding * 2,
+            "3": $base_padding * 3,
+            "4": $base_padding * 4,
+            "5": $base_padding * 5,
+        )
+    ),
+    "padding-right": (
+        "prefix": "pr",
+        "values": (
+            "0": 0,
+            "1": $base_padding,
+            "2": $base_padding * 2,
+            "3": $base_padding * 3,
+            "4": $base_padding * 4,
+            "5": $base_padding * 5,
+        )
+    ),
+    "padding-top": (
+        "prefix": "pt",
+        "values": (
+            "0": 0,
+            "1": $base_padding,
+            "2": $base_padding * 2,
+            "3": $base_padding * 3,
+            "4": $base_padding * 4,
+            "5": $base_padding * 5,
+        )
+    ),
+    "padding-bottom": (
+        "prefix": "pb",
+        "values": (
+            "0": 0,
+            "1": $base_padding,
+            "2": $base_padding * 2,
+            "3": $base_padding * 3,
+            "4": $base_padding * 4,
+            "5": $base_padding * 5,
+        )
+    ),
+    "margin": (
+        "prefix": "m",
+        "values": (
+            "0": 0,
+            "1": $base_margin,
+            "2": $base_margin * 2,
+            "3": $base_margin * 3,
+            "4": $base_margin * 4,
+            "5": $base_margin * 5,
+        )
+    ),
+    "margin-left": (
+        "prefix": "ml",
+        "values": (
+            "0": 0,
+            "1": $base_margin,
+            "2": $base_margin * 2,
+            "3": $base_margin * 3,
+            "4": $base_margin * 4,
+            "5": $base_margin * 5,
+        )
+    ),
+    "margin-right": (
+        "prefix": "mr",
+        "values": (
+            "0": 0,
+            "1": $base_margin,
+            "2": $base_margin * 2,
+            "3": $base_margin * 3,
+            "4": $base_margin * 4,
+            "5": $base_margin * 5,
+        )
+    ),
+    "margin-top": (
+        "prefix": "mt",
+        "values": (
+            "0": 0,
+            "1": $base_margin,
+            "2": $base_margin * 2,
+            "3": $base_margin * 3,
+            "4": $base_margin * 4,
+            "5": $base_margin * 5,
+        )
+    ),
+    "margin-bottom": (
+        "prefix": "mb",
+        "values": (
+            "0": 0,
+            "1": $base_margin,
+            "2": $base_margin * 2,
+            "3": $base_margin * 3,
+            "4": $base_margin * 4,
+            "5": $base_margin * 5,
+        )
+    ),
+    "opacity": (
+        "prefix": "o",
+        "values": (
+            "10": 0.1,
+            "20": 0.2,
+            "30": 0.3,
+            "40": 0.4,
+            "50": 0.5,
+            "60": 0.6,
+            "70": 0.7,
+            "80": 0.8,
+            "90": 0.9,
+            "100": 1,
+        )
+    ),
+    "border-radius":(
+        "prefix": "b_radius",
+        "values": (
+            "default": $base_border_radius,
+            "none": 0,
+            "xs": math.div($base_border_radius, 4),
+            "sm": math.div($base_border_radius, 2),
+            "lg": $base_border_radius * 2,
+            "full": 50%,
+        )
+    ),
+    "display":(
+        "prefix": "display",
+        "values": (
+            "n": none,
+            "i": inline,
+            "b": block,
+            "f": flex,
+            "g": grid,
+            "i_f": inline-flex,
+            "i_b": inline-block,
+            "i_g": inline-grid,
+        )
+    ),
+    "font-size": (
+        "prefix": "font",
+        "values": (
+            "default": $base_fontsize,
+            "sm": $base_fontsize_sm,
+            "md": $base_fontsize_md,
+            "lg": $base_fontsize_lg,
+            "xl": $base_fontsize_xl,
+            "xxl": $base_fontsize_xxl,
+        )
+    ),
+);
+
+// utilities loop(generate utilities classes)
+@each $property, $utility_map in $utilities {
+    $prefix: map-get(
+        $map: $utility_map,
+        $key: "prefix",
+    );
+    $values: map-get(
+        $map: $utility_map,
+        $key: "values",
+    );
+
+    @each $utility_map_key, $utility_map_val in $values {
+        @if ($utility_map_key == "default") {
+            .#{$prefix} {
+                #{$property}: $utility_map_val;
+            }
+        } @else {
+            .#{$prefix}_#{$utility_map_key} {
+                #{$property}: $utility_map_val;
+            }
+        }
+    }
+}

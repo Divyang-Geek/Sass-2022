@@ -1,0 +1,105 @@
+@use "sass:math";
+
+@each $i in (light, regular, medium, semi-bold, bold) {
+    .font-#{$i} {
+        font-weight: $i;
+    }
+}
+
+$Fweight_list: (light, regular, medium, semi-bold, bold);
+
+@each $Fweight_var in $Fweight_list {
+    .F#{$Fweight_var} {
+        font-weight: $Fweight_var;
+    }
+}
+
+$Fcommon_styles_list: ((Flight, light, 16px), (Fregular, normal, 18px));
+
+@each $FcomName, $FcomStyle, $FcomSize in $Fcommon_styles_list {
+    .#{$FcomName} {
+        font-style: $FcomStyle;
+        font-size: $FcomSize;
+    }
+}
+
+$Themes: (
+    (news #f44f74 #f497ac), 
+    (sports #5cbb00 #b2e581), 
+    (entertainment #00afc4 #92d3db)
+);
+
+@each $Theme in $Themes {
+    $ThemeName: nth($list: $Theme, $n: 1);
+    $ThemeColor1: nth($list: $Theme, $n: 2);
+    $ThemeColor2: nth($list: $Theme, $n: 3);
+
+    .#{$ThemeName} {
+        h1 {
+            color: $ThemeColor1;
+            border-bottom: 2px solid $ThemeColor2;
+        }
+        p {
+            color: desaturate($color: $ThemeColor2, $amount: 15%);
+        }
+    }
+}
+
+$multi_blocks: (
+    5 ((1, -70, 30), (2, -130, 80), (3, 10, -30), (4, -90, 50)),
+    7 ((1, -70, 30), (2, -130, 80), (3, 10, -30), (4, -90, 50)),
+    10 ((1, -70, 30), (2, -130, 80), (3, 10, -30), (4, -90, 50))
+);
+
+@each $multi_block in $multi_blocks {
+  $section: nth($multi_block, 1); //5
+  $rows: nth($multi_block, 2); //all rows
+
+  .section-#{$section} {
+    @each $x in $rows {
+      $row: nth($x, 1); //1
+      $top: nth($x, 2); //-70
+      $bottom: nth($x, 3); //30
+      .row-#{$row} {
+        margin: #{$top}px 0 #{$bottom}px;
+      }
+    }
+  }
+}
+
+
+$MediaColsMap: (
+    "xs": 0px,
+    "sm": 576px,
+    "md": 768px,
+    "lg": 992px,
+    "xl": 1200,
+);
+
+// @each $Mname, $Msize in $MediaColsMap {
+//     @media screen and (min-width: #{$Msize}) {  //without media-screen mixin @include
+//         @for $col_var from $col_start through $col_end {
+//             .col-#{$Mname}-#{$col_var} {
+//                 width: (100% / $col_end) * $col_var;
+//                 position: relative;
+//                 padding: 0 15px;
+//                 flex: 0 0 auto;
+//             }
+//         }
+//     }
+// }
+
+@each $Mname, $Msize in $MediaColsMap {
+    @include media-screen(min, $Msize) { //with media-screen mixin @include
+        @for $col_var from $col_start through $col_end {
+            .col--#{$Mname}-#{$col_var} {
+                // width: (100% / $col_end) * $col_var;
+                width: math.div($col_var * 100%, $col_end);
+                position: relative;
+                padding: 0 15px;
+                flex: 0 0 auto;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,41 @@
+.themes,
+h3 {
+    font-family: "Source Code Pro", Helvetica, Arial;
+    border-radius: 4px;
+    @include box_shadow(5px, 5px, 5px, 5px, $primary_color);
+}
+
+// ul li {
+//     $padding: 16px;
+//     padding-left: $padding;
+//     [dir="rtl"] & {
+//         padding: {
+//             left: 0;
+//             right: $padding;
+//         }
+//     }
+// }
+
+.parent-ul {
+    $padding: 35px;
+    ul {
+        li {
+            list-style-position: inside;
+        }
+    }
+    .first-ul {
+        li {
+            padding-left: $padding;
+        }
+    }
+    .second-ul {
+        &[dir="rtl"] {
+            li {
+                padding: {
+                    left: 0;
+                    right: $padding;
+                }
+            }
+        }
+    }
+}

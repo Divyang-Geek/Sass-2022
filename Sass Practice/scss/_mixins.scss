@@ -1,0 +1,141 @@
+@mixin d_flex($dis_flex: flex, $align: center, $justify: center) {
+    display: $dis_flex;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin b_radius($value: 10px) {
+    border-radius: $value;
+}
+
+@mixin box_shadow($x: 0px, $y: 3px, $blur: 6px, $spread: 0px, $color: rgba($black_color, 0.2)) {
+    box-shadow: $x $y $blur $spread $color;
+}
+
+@mixin list_item {
+    li {
+        display: inline-block;
+        margin: 0 15px;
+        @content;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        a {
+            @content;
+
+            span {
+                @content;
+            }
+        }
+    }
+}
+
+@mixin inline_animation($duration, $delay) {
+    $name: inline-#{unique-id()}; //we can add here diffrent name for every animation with "unique-id"
+
+    @keyframes #{$name} {
+        @content;
+    }
+
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-iteration-count: infinite;
+    animation-delay: $delay;
+}
+
+@mixin inline_animation2($name, $duration, $delay) {
+    @keyframes #{$name} {
+        @content;
+    }
+
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-iteration-count: infinite;
+    animation-delay: $delay;
+}
+
+@mixin reset_list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+@mixin horizontal_list {
+    @include reset_list;
+
+    li {
+        display: inline-block;
+        margin: {
+            left: 2px;
+            right: 2px;
+        }
+        padding: {
+            top: 10px;
+            bottom: 10px;
+        }
+        a {
+            color: currentColor;
+            font-weight: bold;
+        }
+    }
+}
+
+@mixin back_image($back_image, $back_repeat, $back_size, $back_position_x, $back_position_y) {
+    background: {
+        image: $back_image;
+        repeat: $back_repeat;
+        position: $back_position_x $back_position_y;
+        size: $back_size;
+    }
+}
+
+@mixin square($size, $radius: 0, $shadow: (0px 0px 5px 0px $black-color)) {
+    width: $size;
+    height: $size;
+    box-shadow: $shadow;
+
+    @if $radius != 0 {
+        border-radius: $radius;
+    }
+}
+
+@mixin order($width, $height, $selectors...) {
+    @for $i from 0 to length($selectors) {
+        #{nth($selectors, $i + 1)} {
+            position: relative;
+            display: inline-flex;
+            flex: 0 0 auto;
+            width: $width;
+            height: $height;
+            box-shadow: 0 0 6px 0 $black_color;
+        }
+    }
+}
+
+@mixin row() {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@mixin col-lg-6() {
+    flex: 0 0 auto;
+    width: 50%;
+}
+
+@mixin hover {
+    &:not(.disabled):hover {
+        @content;
+    }
+}
+
+@mixin media-screen($min_max, $width) {
+    @media screen and (#{$min_max}-width:$width) {
+        @content;
+    };
+}

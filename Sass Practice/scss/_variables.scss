@@ -1,0 +1,46 @@
+$primary_color: #00539b;
+$primary_color_rgb: rgba($primary_color, 0.2);
+$secondary_color: #989b00;
+$black_color: #000000;
+$white_color: #ffffff;
+$transition: 0.5s;
+$box_shadow: 0 0 6px 0 rgba($black_color, 16%);
+
+// color palette
+$color1: #e01a1a;
+$color2: #1ae0cf;
+$color3: #2d6da8;
+$color4: #63e01a;
+$color5: #e01ad6;
+
+// color map
+$colors: (
+    "color1": $color1,
+    "color2": $color2,
+    "color3": $color3,
+    "color4": $color4,
+    "color5": $color5,
+);
+
+// spacing
+$base_padding: 10px;
+$base_margin: 10px;
+
+// borders
+$base_border_thickness: 1px;
+$base_border_radius: 20px;
+
+// box shadow
+$base_box_shadow: 0 3px 6px rgba($black_color, 10%);
+
+// font sizes
+$base_fontsize: 16px;
+$base_fontsize_sm: $base_fontsize * 0.75;
+$base_fontsize_md: $base_fontsize * 1.5;
+$base_fontsize_lg: $base_fontsize * 2.25;
+$base_fontsize_xl: $base_fontsize * 3;
+$base_fontsize_xxl: $base_fontsize * 3.75;
+
+// cols
+$col_start: 1 !default;
+$col_end: 12 !default;

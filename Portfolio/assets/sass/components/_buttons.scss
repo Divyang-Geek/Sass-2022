@@ -1,0 +1,56 @@
+@mixin btn_common {
+    @include d_flex(inline-flex);
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: $transition;
+    cursor: pointer;
+}
+
+@function light_comp($color) {
+    $complement: complement($color);
+    $light_complement: lighten($complement, 15%);
+    @return $light_complement;
+}
+
+@each $color_key, $color_val in $colors {
+    .btn_#{$color_key} {
+        background-color: $color_val;
+        @if ($color_key == "white" or $color_key == "light_yellow") {
+            color: $dark_green;
+        } @else {
+            color: $white;
+        }
+
+        border: none;
+        @include btn_common;
+
+        &:hover {
+            background-color: darken($color: $color_val, $amount: 15%);
+        }
+    }
+    .btn_outlined_#{$color_key} {
+        background-color: transparent;
+        border: 1px solid $color_val;
+        color: $color_val;
+
+        @include btn_common;
+
+        &:hover {
+            background-color: $color_val;
+            color: $white;
+        }
+    }
+    .btn_complement_#{$color_key} {
+        background-color: $color_val;
+        color: light_comp($color_val);
+        @include btn_common();
+
+        &:hover {
+            background-color: light_comp($color_val);
+            color: $color_val;
+        }
+    }
+}

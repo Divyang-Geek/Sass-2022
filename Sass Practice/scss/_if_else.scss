@@ -1,0 +1,120 @@
+$p_text: 3;
+
+.if_check1 {
+    @if $p_text < 5 {
+        color: green;
+    } @else if $p_text >= 10 and $p_text <= 20 {
+        color: yellow;
+    } @else {
+        color: red;
+    }
+}
+
+.if_check2 {
+    $p_text: 25;
+    @if $p_text <= 5 {
+        // 5 or less than 5 = 0 to 5
+        color: green;
+    } @else if $p_text >= 10 and $p_text < 20 {
+        //10 or above and less than 20 but not 20 = 10 to 19
+        color: yellow;
+    } @else if $p_text >= 20 and $p_text < 30 {
+        //20 or above and less than 30 but not 30 = 20 to 29
+        color: blue;
+    } @else {
+        color: red;
+    }
+}
+
+@mixin change_color($Fvalue) {
+    font-size: $Fvalue;
+
+    @if $Fvalue >= 0 and $Fvalue < 10 {
+        //0 or above and less than 10 but not 10 = 0 to 9
+        color: green;
+    } @else if $Fvalue >= 10 and $Fvalue < 25 {
+        //10 or above and less than 25 but not 25 = 10 to 24
+        color: grey;
+    } @else if $Fvalue >= 25 and $Fvalue <= 30 {
+        //25 or above and 30 or less than 30 = 25 to 30
+        color: pink;
+    } @else if $Fvalue > 30 and $Fvalue <= 50 {
+        //30 above and 50 or less than 50 = 30 to 50
+        color: lightskyblue;
+    } @else {
+        color: red;
+    }
+}
+
+.if_check3 {
+    @include change_color(25);
+}
+
+@mixin theme_mode($Tmode) {
+    @if $Tmode == dark {
+        background: black;
+        color: white;
+    } @else if $Tmode == light {
+        background: lightgrey;
+        color: cadetblue;
+    }
+}
+
+.theme_change_box {
+    @include theme_mode(dark);
+    padding: 30px;
+    width: 500px;
+
+    h3 {
+        margin-bottom: 20px;
+    }
+
+    p {
+        @include theme_mode(light);
+        padding: 10px;
+    }
+}
+
+@mixin avatar($size, $circle: false) {
+    //false id default value
+    width: $size;
+    height: $size;
+    box-shadow: $box_shadow;
+
+    @if $circle {
+        border-radius: $size/2;
+    }
+}
+
+.square-avatar {
+    @include avatar(100px, $circle: false);
+}
+
+.circle-avatar {
+    @include avatar(100px, $circle: true);
+}
+
+@mixin triangle_arrow($size, $color, $direction) {
+    width: 0;
+    height: 0;
+
+    border-color: transparent;
+    border-style: solid;
+    border-width: $size / 2;
+
+    @if $direction == top {
+        border-bottom-color: $color;
+    } @else if $direction == right {
+        border-left-color: $color;
+    } @else if $direction == bottom {
+        border-top-color: $color;
+    } @else if $direction == left {
+        border-right-color: $color;
+    } @else {
+        @error "Unknown Direction #{$direction}.";
+    }
+}
+
+.triangle-top {
+    @include triangle_arrow(10px, $black_color, top)
+}

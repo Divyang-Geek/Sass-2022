@@ -1,0 +1,116 @@
+@use "sass:math";
+
+// Utilities map
+$utilities: (
+    "display": (
+        "utility_map_property": display,
+        "utility_map_class": "dis",
+        "utility_map_values": (
+            "b": block,
+        ),
+    ),
+    "min-height": (
+        "utility_map_property": min-height,
+        "utility_map_class": "min_h",
+        "utility_map_values": (
+            "100vh": 100vh,
+        ),
+    ),
+    "text-align": (
+        "utility_map_property": text-align,
+        "utility_map_class": "t_align",
+        "utility_map_values": (
+            "left": left,
+            "center": center,
+            "right": right,
+            "justify": justify,
+        ),
+    ),
+);
+
+// Utilities loop(generate utilities classes)
+@each $utility_map_property, $utility_map in $utilities {
+    $utility_map_property: map-get(
+        $map: $utility_map,
+        $key: "utility_map_property",
+    );
+    $utility_map_class: map-get(
+        $map: $utility_map,
+        $key: "utility_map_class",
+    );
+    $utility_map_values: map-get(
+        $map: $utility_map,
+        $key: "utility_map_values",
+    );
+
+    @each $utility_map_key, $utility_map_val in $utility_map_values {
+        @if ($utility_map_key == "default") {
+            .#{$utility_map_class} {
+                #{$utility_map_property}: $utility_map_val;
+            }
+        } @else {
+            .#{$utility_map_class}_#{$utility_map_key} {
+                #{$utility_map_property}: $utility_map_val;
+            }
+        }
+    }
+}
+
+// Spaces
+@mixin utility($breakpoint: "") {
+    @each $key, $val in $spacers {
+        .p#{$breakpoint}_#{$key} {
+            padding: #{$val} !important;
+        }
+        .pt#{$breakpoint}_#{$key} {
+            padding-top: #{$val} !important;
+        }
+        .pr#{$breakpoint}_#{$key} {
+            padding-right: #{$val} !important;
+        }
+        .pb#{$breakpoint}_#{$key} {
+            padding-bottom: #{$val} !important;
+        }
+        .pl#{$breakpoint}_#{$key} {
+            padding-left: #{$val} !important;
+        }
+        .px#{$breakpoint}_#{$key} {
+            padding-right: #{$val} !important;
+            padding-left: #{$val} !important;
+        }
+        .py#{$breakpoint}_#{$key} {
+            padding-top: #{$val} !important;
+            padding-bottom: #{$val} !important;
+        }
+
+        .m#{$breakpoint}_#{$key} {
+            margin: #{$val} !important;
+        }
+        .mt#{$breakpoint}_#{$key} {
+            margin-top: #{$val} !important;
+        }
+        .mr#{$breakpoint}_#{$key} {
+            margin-right: #{$val} !important;
+        }
+        .mb#{$breakpoint}_#{$key} {
+            margin-bottom: #{$val} !important;
+        }
+        .ml#{$breakpoint}_#{$key} {
+            margin-left: #{$val} !important;
+        }
+        .mx#{$breakpoint}_#{$key} {
+            margin-right: #{$val} !important;
+            margin-left: #{$val} !important;
+        }
+        .my#{$breakpoint}_#{$key} {
+            margin-top: #{$val} !important;
+            margin-bottom: #{$val} !important;
+        }
+    }
+}
+
+@each $map_key, $map_val in $grid_breakpoints {
+    @include media_screen(min, $map_val) {
+        @include utility($breakpoint: "_" + $map_key);
+    }
+}
